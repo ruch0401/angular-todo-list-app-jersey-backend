@@ -40,4 +40,12 @@ public class PostResource {
     public int updatePost(@PathParam("id") String id, Post post) {
         return postService.updatePost(Integer.parseInt(id), post);
     }
+
+    @DELETE
+    @Path("{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
+    public int deletePost(@PathParam("id") String id) {
+        return postService.deletePost(Integer.parseInt(id));
+    }
 }

@@ -50,7 +50,7 @@ public class PostService {
         String day = post.getDay();
         boolean reminder = post.isReminder();
         String sql = String.format("INSERT INTO todoschema.todotable (text, day, reminder) VALUES ('%s','%s', %s)",text, day, reminder);
-        return postDAO.insertOrUpdate(sql);
+        return postDAO.insertUpdateOrDelete(sql);
     }
 
     public int updatePost(int id, Post post) {
@@ -58,6 +58,11 @@ public class PostService {
         String day = post.getDay();
         boolean reminder = post.isReminder();
         String sql = String.format("UPDATE todoschema.todotable SET text='%s', day='%s', reminder=%s WHERE id=%d;",text, day, reminder, id);
-        return postDAO.insertOrUpdate(sql);
+        return postDAO.insertUpdateOrDelete(sql);
+    }
+
+    public int deletePost(int id) {
+        String sql = String.format("DELETE FROM todoschema.todotable WHERE id = %d", id);
+        return postDAO.insertUpdateOrDelete(sql);
     }
 }

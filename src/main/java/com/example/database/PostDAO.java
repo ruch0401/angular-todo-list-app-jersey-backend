@@ -23,7 +23,7 @@ public class PostDAO {
         return resultSet;
     }
 
-    public int insertOrUpdate(String sql) {
+    public int insertUpdateOrDelete(String sql) {
         conn = connection.setConnection();
         try {
             return conn.prepareStatement(sql).executeUpdate();
