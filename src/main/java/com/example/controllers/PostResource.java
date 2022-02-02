@@ -32,4 +32,12 @@ public class PostResource {
     public int addPost(Post post) {
         return postService.addPost(post);
     }
+
+    @PUT
+    @Path("{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
+    public int updatePost(@PathParam("id") String id, Post post) {
+        return postService.updatePost(Integer.parseInt(id), post);
+    }
 }
