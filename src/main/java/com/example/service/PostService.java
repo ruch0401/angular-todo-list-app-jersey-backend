@@ -15,7 +15,7 @@ public class PostService {
     public List<Post> getPosts() {
         List<Post> posts = new ArrayList<>();
         try {
-            ResultSet rs = postDAO.getResultSet();
+            ResultSet rs = postDAO.getResultSet("SELECT * FROM todoschema.todotable");
             while (rs.next()) {
                 int id = rs.getInt(1);
                 String text = rs.getString(2);
@@ -28,5 +28,22 @@ public class PostService {
             ex.printStackTrace();
         }
         return posts;
+    }
+
+    public Post getPost(int id) {
+        try {
+            String sql = String.format("SELECT * FROM todoschema.todotable WHERE id = %d", id);
+            ResultSet rs = postDAO.getResultSet(sql);
+            while (rs.next()) {
+                int tid = rs.getInt(1);
+                String text = rs.getString(2);
+                String day = rs.getString(3);
+                boolean reminder = rs.getBoolean(4);
+                return new Post(tid, text, day, reminder);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
     }
 }

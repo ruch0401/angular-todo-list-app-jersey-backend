@@ -12,10 +12,10 @@ public class PostDAO {
     PreparedStatement statement = null;
     ResultSet resultSet = null;
 
-    public ResultSet getResultSet() {
+    public ResultSet getResultSet(String sql) {
         try {
             conn = connection.setConnection();
-            statement = conn.prepareStatement(Queries.GET_ALL_TODOS);
+            statement = conn.prepareStatement(sql);
             resultSet = statement.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
