@@ -17,11 +17,10 @@ public class PostService {
         try {
             ResultSet rs = postDAO.getResultSet("SELECT * FROM todoschema.todotable");
             while (rs.next()) {
-                int id = rs.getInt(1);
                 String text = rs.getString(2);
                 String day = rs.getString(3);
                 boolean reminder = rs.getBoolean(4);
-                Post p = new Post(id, text, day, reminder);
+                Post p = new Post(text, day, reminder);
                 posts.add(p);
             }
         } catch (SQLException ex) {
@@ -35,15 +34,22 @@ public class PostService {
             String sql = String.format("SELECT * FROM todoschema.todotable WHERE id = %d", id);
             ResultSet rs = postDAO.getResultSet(sql);
             while (rs.next()) {
-                int tid = rs.getInt(1);
                 String text = rs.getString(2);
                 String day = rs.getString(3);
                 boolean reminder = rs.getBoolean(4);
-                return new Post(tid, text, day, reminder);
+                return new Post(text, day, reminder);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return null;
+    }
+
+    public int addPost(Post post) {
+        String text = post.getText();
+        String day = post.getDay();
+        boolean reminder = post.isReminder();
+        String sql = String.format("INSERT INTO todoschema.todotable (text, day, reminder) VALUES ('%s','%s', %s)",text, day, reminder);
+        return postDAO.insertOrUpdate(sql);
     }
 }

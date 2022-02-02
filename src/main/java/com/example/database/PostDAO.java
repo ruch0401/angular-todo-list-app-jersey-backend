@@ -22,4 +22,15 @@ public class PostDAO {
         }
         return resultSet;
     }
+
+    public int insertOrUpdate(String sql) {
+        conn = connection.setConnection();
+        try {
+            return conn.prepareStatement(sql).executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Unsuccessful insert or update");
+        return -1;
+    }
 }

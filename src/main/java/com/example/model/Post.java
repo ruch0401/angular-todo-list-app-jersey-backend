@@ -1,7 +1,6 @@
 package com.example.model;
 
 public class Post {
-    private int id;
     private String text;
     private String day;
     private boolean reminder;
@@ -9,19 +8,10 @@ public class Post {
     public Post() {
     }
 
-    public Post(int id, String text, String day, boolean reminder) {
-        this.id = id;
+    public Post(String text, String day, boolean reminder) {
         this.text = text;
         this.day = day;
         this.reminder = reminder;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getText() {
